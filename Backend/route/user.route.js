@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-const {signup} = require('../controller/user.controller');
+const {signup, login, logout} = require('../controller/user.controller');
 
 
 
 // Routes Mapping
 router.post("/signup", signup);
+router.post("/login", login);
+router.post("/logout", logout);
+
+
 
 
 
