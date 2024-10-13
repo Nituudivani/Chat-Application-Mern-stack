@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 export default function Signup() {
   const {
@@ -8,10 +9,35 @@ export default function Signup() {
     watch,
     formState: { errors },
   } = useForm();
-   const validatePasswordMatch = (value) => {
-    return value === password || "Password and confirm Password don't match"
-   }
-  const onSubmit = (data) => console.log(data);
+  const password = watch("password", "");
+  const confirmpassword = watch("confirmpassword", "");
+  const validatePasswordMatch = (value) => {
+    return value === password || "Password don't match";
+  };
+  const onSubmit = async (data) => {
+    const userInfo = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      confirmpassword: data.Confirmpassword,
+    };
+
+    await axios
+      .post("http://localhost:5000/api/v1/signup", userInfo)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data) {
+          alert("Signup successful! You can now log in.");
+        }
+
+        sessionStorage.setItem("messenger", JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        if (error.response) {
+          alert("Error:" + error.response.data.error);
+        }
+      });
+  };
   return (
     <>
       <div>
@@ -45,10 +71,12 @@ export default function Signup() {
                 placeholder="Username"
                 {...register("name", { required: true })}
               />{" "}
-             
             </label>
-            {errors.name && <span className="text-red-600 text-sm font-semibold">**This field is required**</span>}
-
+            {errors.name && (
+              <span className="text-red-600 text-sm font-semibold">
+                **This field is required**
+              </span>
+            )}
 
             {/* Email */}
             <label className="input input-bordered flex items-center gap-2">
@@ -67,10 +95,12 @@ export default function Signup() {
                 placeholder="Email"
                 {...register("email", { required: true })}
               />{" "}
-             
             </label>
-            {errors.email && <span className="text-red-600 text-sm font-semibold">**This field is required**</span>}
-
+            {errors.email && (
+              <span className="text-red-600 text-sm font-semibold">
+                **This field is required**
+              </span>
+            )}
 
             {/* password */}
             <label className="input input-bordered flex items-center gap-2">
@@ -92,10 +122,12 @@ export default function Signup() {
                 placeholder="password"
                 {...register("password", { required: true })}
               />{" "}
-             
             </label>
-            {errors.password && <span className="text-red-600 text-sm font-semibold">**This field is required**</span>}
-
+            {errors.password && (
+              <span className="text-red-600 text-sm font-semibold">
+                **This field is required**
+              </span>
+            )}
 
             {/* Confirmpassword */}
             <label className="input input-bordered flex items-center gap-2">
@@ -115,11 +147,17 @@ export default function Signup() {
                 type="password"
                 className="grow"
                 placeholder="Confirmpassword"
-                {...register("Confirmpassword", { required: true, validate: validatePasswordMatch,})}
+                {...register("Confirmpassword", {
+                  required: true,
+                  validate: validatePasswordMatch,
+                })}
               />{" "}
-             
             </label>
-            {errors.Confirmpassword && <span className="text-red-600 text-sm font-semibold">**This field is required**</span>}
+            {errors.Confirmpassword && (
+              <span className="text-red-600 text-sm font-semibold">
+                {errors.Confirmpassword.message}
+              </span>
+            )}
 
             {/* Text and Button */}
             <div className="flex justify-center">
