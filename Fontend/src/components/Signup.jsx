@@ -1,8 +1,11 @@
-import React from "react";
+import React  from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useAuth } from "../context/AuthProvider";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
+  const {authUser, setAuthUser} = useAuth();
   const {
     register,
     handleSubmit,
@@ -31,6 +34,7 @@ export default function Signup() {
         }
 
         sessionStorage.setItem("messenger", JSON.stringify(response.data));
+        setAuthUser(response.data);
       })
       .catch((error) => {
         if (error.response) {
@@ -171,10 +175,10 @@ export default function Signup() {
 
             <p>
               Have any Account?{" "}
-              <span className="text-blue-500 underline cursor-pointer ml-1">
+              <Link to={"/login"} className="text-blue-500 underline cursor-pointer ml-1">
                 {" "}
                 Login
-              </span>
+              </Link>
             </p>
           </form>
         </div>

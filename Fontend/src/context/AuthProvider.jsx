@@ -1,9 +1,10 @@
 import React, { createContext, useState } from "react";
 import Cookies from "js-cookie";
+import { useContext } from "react";
 
 export const AuthContext = createContext();
 
-export default function AuthProvider({ children }) {
+export const AuthProvider = ({ children })  => {
   const initialUserState =
     Cookies.get("jwt") || sessionStorage.getItem("messenger");
 
