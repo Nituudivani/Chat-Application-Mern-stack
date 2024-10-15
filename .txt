@@ -21,3 +21,28 @@ Conversation Model
 _id =ksjdecbccncm (mongo express)
 member[senderID, receiverID]
 Message[_id]
+
+
+
+login :
+http://localhost:5000/api/v1/login
+
+{
+    
+    "email":"nitu@gmail.com",
+    "password":"123"
+    
+}
+
+
+sendMessage:
+
+http://localhost:5000/api/message/send/670ca025025f752d098929bc
+
+{
+    "message":"Thanks bhai"
+}
+
+
+senderId": "670cc1243b60575515d4ff27",
+        "receiverId": "670ca025025f752d098929bc",

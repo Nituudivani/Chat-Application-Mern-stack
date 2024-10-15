@@ -25,12 +25,12 @@ app.use(cors());
 app.use( express.static("files"));   
 app.use( "/", express.static("public"));  
 app.use(express.json({type: "application/json"})); 
-// app.use(express.urlencoded({ extended: true}));  
+app.use(express.urlencoded({ extended: true}));  
 app.use(bodyParser.json());  
 
 
 // Body parser, add data to the incoming body
-// app.use(express.json({limit: '10kb'})); 
+app.use(express.json({limit: '10kb'})); 
 app.use(cookieParser());  
 
 // Data sanitization against NoSQL Query injection

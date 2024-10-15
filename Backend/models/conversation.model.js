@@ -4,7 +4,7 @@ const  Message = require('./message.model');
 
 
 const conversationSchema = new mongoose.Schema({
-    paerticipants: [
+    participants: [
         { 
             type: mongoose.Schema.Types.ObjectId, 
             ref: User,
@@ -26,4 +26,4 @@ const conversationSchema = new mongoose.Schema({
 );
 
 
-module.exports = mongoose.model("conversation", conversationSchema);
+module.exports = mongoose.model("Conversation", conversationSchema);
