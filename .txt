@@ -1,0 +1,23 @@
+****Message Model ****
+
+
+Nitin(sender) -----> " Hello "
+Raj(receiver)----> "Hii"
+
+
+_id = jkslfv (mongo express)
+senderID =   670c9f37025f752d098929b7
+receiverID =   670cc0e53b60575515d4ff21
+Message = "Hello"  
+
+_id = jkslfvefvv (mongo express)
+senderID =   670cc0e53b60575515d4ff21
+receiverID =   670c9f37025f752d098929b7
+Message = "Hii"  
+
+
+Conversation Model
+
+_id =ksjdecbccncm (mongo express)
+member[senderID, receiverID]
+Message[_id]

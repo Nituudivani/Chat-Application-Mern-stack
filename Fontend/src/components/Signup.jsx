@@ -26,7 +26,7 @@ export default function Signup() {
     };
 
     await axios
-      .post("http://localhost:5000/api/v1/signup", userInfo)
+      .post("/api/v1/signup", userInfo)
       .then((response) => {
         console.log(response.data);
         if (response.data) {

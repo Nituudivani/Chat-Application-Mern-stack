@@ -19,7 +19,7 @@ export default function Login() {
       
     };
    
-    axios.post("http://localhost:5000/api/v1/login", userInfo)
+    axios.post("/api/v1/login", userInfo)
     .then((response) => {
       console.log(response.data);
       if (response.data) {

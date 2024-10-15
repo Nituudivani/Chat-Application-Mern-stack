@@ -11,6 +11,8 @@ const dotenv = require('dotenv');
 
 
 const userRoute = require('./route/user.route'); // Import user routes
+const messageRoute = require('./route/message.route'); // Import user routes
+
 dotenv.config();
 
 
@@ -52,6 +54,7 @@ mongoose.connect(DB)
 
 // Use the user routes
 app.use('/api/v1', userRoute); 
+app.use('/api/message', messageRoute); 
 
 // Default route
 app.get("/welcome",  async (req, res) => {
