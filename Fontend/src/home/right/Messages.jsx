@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Message from "./Message";
 import useGetMessage from "../../context/useGetMessage";
 import Loading from "../../components/Loading";
@@ -7,7 +7,15 @@ function Messages() {
   const {message, loading} = useGetMessage();
 
   console.log(message);
-
+  const lastMessageRef = useRef()
+  useEffect(() => {
+      setTimeout(() => {
+       if(lastMessageRef.current){
+        lastMessageRef.current.scrollIntoView({ behavior: "smooth" })
+       }
+      }, 100);
+  },[message]);
+  
   return (
     <>
 

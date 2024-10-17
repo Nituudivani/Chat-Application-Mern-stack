@@ -10,8 +10,6 @@ export default function useGetMessage() {
     const getMessage = async () => {
       setLoading(true);
       if (selectedConversation && selectedConversation._id) {
-        
-        console.log(selectedConversation._id)
         try {
           const res = await axios.get(
             `/api/message/get/${selectedConversation._id}`
@@ -21,11 +19,14 @@ export default function useGetMessage() {
           setLoading(false);
         } catch (error) {   
           console.log("Error in useGetMessage: ", error);
-         
+          setLoading(false);
         }
       }
     };
     getMessage();
   }, [selectedConversation, setMessage]);
-  return {message, loading };
+  return {
+    message, 
+    loading 
+  };
 };
