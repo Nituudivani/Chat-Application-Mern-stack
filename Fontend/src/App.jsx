@@ -5,8 +5,10 @@ import Logout from "./home/left1/Logout";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import { useAuth } from "./context/AuthProvider";
+import { Toaster } from "react-hot-toast";
+
 import { Routes, Route, Navigate } from "react-router-dom";
-import Loading from "./components/Loading";
+
 
 export default function App() {
   const { authUser, setAuthUser } = useAuth();
@@ -22,7 +24,9 @@ export default function App() {
                 <Logout></Logout>
                 <Left></Left>
                 <Right></Right>
-              </div>
+                 </div>
+
+                 
             ) : (
               <Navigate to={"/login"} />
             )
@@ -38,6 +42,7 @@ export default function App() {
           element={authUser ? <Navigate to={"/"} /> : <Signup />}
         />
       </Routes>
+      <Toaster />
     </>
   );
 }

@@ -13,13 +13,18 @@ const dotenv = require('dotenv');
 const userRoute = require('./route/user.route'); // Import user routes
 const messageRoute = require('./route/message.route'); // Import user routes
 
+
+const {app, server} = require('./SocketIO/server');
+// const  = require('socket.io');
+
+
 dotenv.config();
 
-
+// const app = express();
 
 const PORT = process.env.PORT || 6000;    
-const app = express();  
-const server = require("http").createServer(app);  
+
+// const server = require("http").createServer(app);  
 let cors = require("cors");  
 app.use(cors());  
 app.use( express.static("files"));   

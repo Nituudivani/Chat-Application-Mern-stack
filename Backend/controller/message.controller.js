@@ -1,6 +1,6 @@
 const Conversation = require("../models/conversation.model");
 const Message = require("../models/message.model");
-
+const { getReceiverSocketId, io } = require("../SocketIO/server");
 
 exports.sendMessage = async (req, res) => {
   try {
@@ -13,7 +13,7 @@ exports.sendMessage = async (req, res) => {
     });
     if (!conversation) {
       conversation = await Conversation.create({
-         participants: [senderId, receiverId],
+        participants: [senderId, receiverId],
       });
     }
     const newMessage = new Message({
@@ -27,35 +27,59 @@ exports.sendMessage = async (req, res) => {
 
     await Promise.all([conversation.save(), newMessage.save()]);
 
-    res.status(201).json({ message: "Message send successfully", newMessage });
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
+
+    // res.status(201).json(newMessage );
+
+    try {
+      // Find the conversation with both participants
+      let conversation = await Conversation.findOne({
+        participants: { $all: [senderId, receiverId] }, // Updated field name to 'participants'
+      }).populate("message"); // Populate the 'messages' field
+
+      // If no conversation exists, return an empty array
+      if (!conversation) {
+        console.log(conversation);
+        return res.status(201).json([]);
+      }
+
+      // Return the messages array from the conversation
+      const messages = conversation.message || []; // Ensure 'messages' is an array
+      res.status(201).json(messages);
+    } catch (error) {
+      console.log("Error in getMessage", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
   } catch (error) {
-    console.log("Error in sendingMessage", error);
+    console.log("Error i7n sendingMessage", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
 
-
 exports.getMessage = async (req, res) => {
-   try {
-     const { id: chatUser } = req.params;
-     const senderId = req.user._id; // current logged-in user
-     
-     // Find the conversation with both participants
-     let conversation = await Conversation.findOne({
+  try {
+    const { id: chatUser } = req.params;
+    const senderId = req.user._id; // current logged-in user
+
+    // Find the conversation with both participants
+    let conversation = await Conversation.findOne({
       participants: { $all: [senderId, chatUser] }, // Updated field name to 'participants'
-     }).populate("message"); // Populate the 'messages' field
+    }).populate("message"); // Populate the 'messages' field
 
-     // If no conversation exists, return an empty array
-     if (!conversation) {
-         console.log(conversation)
-       return res.status(201).json([]);
-     }
+    // If no conversation exists, return an empty array
+    if (!conversation) {
+      console.log(conversation);
+      return res.status(201).json([]);
+    }
 
-     // Return the messages array from the conversation
-     const  messages = conversation.message || []; // Ensure 'messages' is an array
-     res.status(201).json( messages);
-   } catch (error) {
-     console.log("Error in getMessage", error);
-     res.status(500).json({ error: "Internal server error" });
-   }
+    // Return the messages array from the conversation
+    const messages = conversation.message || []; // Ensure 'messages' is an array
+    res.status(201).json(messages);
+  } catch (error) {
+    console.log("Error in getMessage", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 };

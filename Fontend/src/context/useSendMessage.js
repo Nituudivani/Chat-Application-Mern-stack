@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useConversation from "../statemanage/useConversation";
 import axios from "axios";
+import useGetMessage from "./useGetMessage";
 
 export default function useSendMessage() {
   const [loading, setLoading] = useState(false);
@@ -9,21 +10,21 @@ export default function useSendMessage() {
   const sendMessage = async (message) => {
     setLoading(true);
     // if (selectedConversation && selectedConversation._id) {
-      try {
-        const res = await axios.post(
-          `/api/message/send/${selectedConversation._id}` ,
-          { message}
-        );
+    try {
+      const res = await axios.post(
+        `/api/message/send/${selectedConversation._id}`,
+        { message }
+      );
 
-        setMessage([...message, res.data]);
-        setLoading(false);
-      } catch (error) {
-        console.log("Error in send Message: ", error);
-        setLoading(false);
-      }
-    };
-    // sendMessage();
-  return { loading, sendMessage };
+      setMessage([...res.data]);
+      setLoading(false);
+    } catch (error) {
+      console.log("Error in send Message: ", error);
+      setLoading(false);
+    }
   };
- 
+  // sendMessage();
+  return { loading, sendMessage };
+}
+
 // }

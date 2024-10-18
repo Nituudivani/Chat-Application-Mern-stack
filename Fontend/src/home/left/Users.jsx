@@ -30,6 +30,7 @@ import userGetAllUser from "../../context/userGetAllUser";
 
 function Users() {
   const [allUsers, loading] = userGetAllUser();
+  console.log(allUsers);
 
   // Show loading state
   if (loading) {
