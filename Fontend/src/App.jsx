@@ -21,9 +21,9 @@ export default function App() {
           element={
             authUser ? (
               <div className="flex h-screen">
-                <Logout></Logout>
-                <Left></Left>
-                <Right></Right>
+                <Logout />
+                <Left />
+                <Right />
                  </div>
 
                  

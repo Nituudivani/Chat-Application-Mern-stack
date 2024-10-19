@@ -47,7 +47,7 @@ export default function Login() {
         <div className="flex h-screen items-center justify-center">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="border border-white px-6 py-3 rounded-md space-y-3 w-96"
+            className="border border-white px-6 py-3 rounded-md space-y-3 w-96" 
           >
             <h1 className="text-2xl items-center text-blue-600 font-bold">
               Message

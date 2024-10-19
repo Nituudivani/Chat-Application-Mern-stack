@@ -1,29 +1,3 @@
-// import React from "react";
-// import User from "./User";
-// import userGetAllUser from "../../context/userGetAllUser";
-
-// function Users() {
-//   const [allUsers, loading] = userGetAllUser();
-//   console.log(allUsers);
-
-//   return (
-//     <div
-//       className=" py-2 flex-nitin overflow-y-auto"
-//       style={{ maxHeight: "calc(84vh - 1vh)" }}
-
-//     >
-      
-//       {allUsers.map((user, index) => {
-//         return <User key={index} user={user} />
-//       })}
-
-//     </div>
-//   );
-// }
-
-// export default Users;
-
-
 import React from "react";
 import User from "./User";
 import userGetAllUser from "../../context/userGetAllUser";
