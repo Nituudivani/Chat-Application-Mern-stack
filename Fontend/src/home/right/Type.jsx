@@ -23,7 +23,7 @@ function Type() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="flex space-x-3 h-[11vh] text-center bg-gray-800 items-center relative"> {/* Added relative positioning here */}
+        <div className="flex space-x-3 h-[9vh] text-center bg-gray-800 items-center relative"> {/* Added relative positioning here */}
           {/* Emoji Button (on the left side of the input) */}
           <button
             type="button"
