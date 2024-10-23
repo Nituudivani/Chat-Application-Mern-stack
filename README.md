@@ -25,21 +25,21 @@ Developed a dynamic real-time chat application using the MERN stack (MongoDB, Ex
 
 # **Features**
 
-## **Real-Time Messaging:**
+### **<small>Real-Time Messaging:</small>**
 - Instant messaging capability with real-time updates.
 - WebSocket-based communication powered by Socket.io for seamless interaction.
 
-## **User Authentication:**
+### **<small>User Authentication:</small>**
 - Secure user authentication and authorization system.
 - Login and registration functionalities with JWT cookies and hashed passwords.
 - Middleware implemented for secure routes.
 
-## **Message History:**
+### **<small>Message History:</small>**
 - Persisted message history for users to view previous conversations.
 
-## **Notifications:**
+### **<small>Notifications:</small>**
 - Real-time notifications for new messages and mentions.
 
-## **Search Functionality:**
+### **<small>Search Functionality:</small>**
 - Search for users by name.
 
