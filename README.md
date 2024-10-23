@@ -1,3 +1,9 @@
+MERN Chat-Applicatiom
+
+Visit here: 
+
+Developed a dynamic real-time chat application using the MERN stack (MongoDB, Express.js, React.js, Node.js) and Socket.io. This platform enables users to engage in instant messaging, complete with a range of features such as user authentication, real-time notifications, and a responsive interface designed for seamless communication across all devices.
+
 ## ScreenShots
 
 ![App Screenshot](https://res.cloudinary.com/djkvcjvrs/image/upload/v1729567108/github/z2zwvpaalmncc4aupns2.png)
