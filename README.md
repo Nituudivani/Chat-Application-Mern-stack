@@ -1,4 +1,4 @@
-MERN Chat-Applicatiom
+### **<small>Mern chat-application</small>**
 
 Visit here: 
 
